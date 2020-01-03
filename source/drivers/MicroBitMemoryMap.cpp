@@ -42,6 +42,7 @@ DEALINGS IN THE SOFTWARE.
   * Creates an instance of MicroBitMemoryMap
   */
 MicroBitMemoryMap::MicroBitMemoryMap()
+        : regionCount(0)
 {
       // Assumes PXT Built program
       // SD
