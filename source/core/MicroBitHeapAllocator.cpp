@@ -271,8 +271,7 @@ void *microbit_malloc(size_t size, HeapDefinition &heap)
   *
   * @return A pointer to the allocated memory, or NULL if insufficient memory is available.
   */
-extern "C"
-void *malloc(size_t size)
+void *std::malloc(size_t size)
 {
     static uint8_t initialised = 0;
     void *p;
@@ -320,8 +319,7 @@ void *malloc(size_t size)
   *
   * @param mem The memory area to release.
   */
-extern "C"
-void free(void *mem)
+void std::free(void *mem)
 {
 	uint32_t	*memory = (uint32_t *)mem;
 	uint32_t	*cb = memory-1;
@@ -353,7 +351,7 @@ void free(void *mem)
     microbit_panic(MICROBIT_HEAP_ERROR);
 }
 
-void* calloc (size_t num, size_t size)
+void* std::calloc (size_t num, size_t size)
 {
     void *mem = malloc(num*size);
 
@@ -363,8 +361,7 @@ void* calloc (size_t num, size_t size)
     return mem;
 }
 
-extern "C"
-void* realloc (void* ptr, size_t size)
+void* std::realloc (void* ptr, size_t size)
 {
     void *mem = malloc(size);
 
