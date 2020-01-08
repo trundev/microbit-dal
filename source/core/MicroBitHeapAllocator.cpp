@@ -59,6 +59,13 @@ DEALINGS IN THE SOFTWARE.
 // A list of all active heap regions, and their dimensions in memory.
 HeapDefinition heap[MICROBIT_MAXIMUM_HEAPS] = { };
 uint8_t heap_count = 0;
+#ifdef __ARMCC_VERSION  //HACK: The armlink script in TOOLCHAIN_ARM_STD does not define __end__ symbol
+// Use the RW_IRAM1 region end-address, as declared in:
+// https://github.com/lancaster-university/mbed-classic/blob/master/targets/cmsis/TARGET_NORDIC/TARGET_MCU_NRF51822/TOOLCHAIN_ARM_STD/TARGET_MCU_NRF51_16K_S110/nRF51822.sct#L21
+// The armlink auto-generated region symbols are described here:
+// http://www.keil.com/support/man/docs/armlink/armlink_pge1362065952432.htm
+#define __end__ Image$$RW_IRAM1$$ZI$$Limit
+#endif
 extern "C" int __end__;
 
 #if CONFIG_ENABLED(MICROBIT_DBG) && CONFIG_ENABLED(MICROBIT_HEAP_DBG)
