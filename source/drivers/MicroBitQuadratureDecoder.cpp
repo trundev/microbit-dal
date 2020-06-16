@@ -30,6 +30,10 @@ DEALINGS IN THE SOFTWARE.
 #include "ErrorNo.h"
 #include "MicroBitQuadratureDecoder.h"
 
+#ifndef UINT16_MAX  //HACK: armcc support
+#define UINT16_MAX ((uint16_t)-1)
+#endif
+
 /**
   * Constructor.
   * Create a software abstraction of the quadrature decoder.
@@ -45,11 +49,13 @@ DEALINGS IN THE SOFTWARE.
   */
 MicroBitQuadratureDecoder::MicroBitQuadratureDecoder(MicroBitPin& phaseA_, MicroBitPin& phaseB_, MicroBitPin& LED_, uint8_t LEDDelay_, uint8_t flags_)
     : phaseA(phaseA_), phaseB(phaseB_), LED(&LED_), LEDDelay(LEDDelay_), flags(flags_)
+    , position(0), samplePeriod(128), faults(0)
 {
 }
 
 MicroBitQuadratureDecoder::MicroBitQuadratureDecoder(MicroBitPin& phaseA_, MicroBitPin& phaseB_, uint8_t flags_)
     : phaseA(phaseA_), phaseB(phaseB_), LED(NULL), flags(flags_)
+    , position(0), samplePeriod(128), faults(0), LEDDelay(0)
 {
 }
 

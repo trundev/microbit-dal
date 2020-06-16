@@ -225,6 +225,7 @@ static void securitySetupCompletedCallback(Gap::Handle_t handle, SecurityManager
  * Hence, the init() member function should be used to initialise the BLE stack.
  */
 MicroBitBLEManager::MicroBitBLEManager(MicroBitStorage &_storage) : storage(&_storage)
+        , currentMode(MICROBIT_MODE_APPLICATION)
 {
     manager = this;
     this->ble = NULL;
@@ -241,6 +242,7 @@ MicroBitBLEManager::MicroBitBLEManager(MicroBitStorage &_storage) : storage(&_st
  * Hence, the init() member function should be used to initialise the BLE stack.
  */
 MicroBitBLEManager::MicroBitBLEManager() : storage(NULL)
+        , currentMode(MICROBIT_MODE_APPLICATION)
 {
     manager = this;
     this->ble = NULL;
